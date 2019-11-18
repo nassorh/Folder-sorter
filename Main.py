@@ -16,9 +16,6 @@ def fetchExtension(folderDir):
     #Define all the extension array
     extensions = []
 
-    #Status whether to add to the array or not
-    status = True
-
     #All files in the folders
     arrayOfFiles = os.listdir(folderDir)
 
@@ -73,8 +70,7 @@ def sortCatergory(extensionArray):
                     if extension not in extensionError:
                         extensionError.append(extension)
 
-
-    print("--Send these details to an admin--\nThese extension need to be added:\n",extensionError,"\n")
+    log(("extension that needed to be added: ",extensionError,"\n"))
     return fileCatergory #Returns an array of the filename and the catergory
 
 def foldersToCreate(fileCatergoryArray,Directory):
@@ -92,9 +88,9 @@ def createFolders(foldersName,Directory):
         try:
             # Create target Directory
             os.mkdir(FileDirectory)
-            print("Directory " , FileDirectory ,  " Created ")
+            log(("Directory " , FileDirectory ,  " Created\n"))
         except FileExistsError:
-            print("Directory " , FileDirectory ,  " already exists")
+            log(("Directory " , FileDirectory ,  " already exists\n"))
 
 def moveFiles(filesCatergory,Directory):
     for files in filesCatergory:
@@ -105,12 +101,17 @@ def moveFiles(filesCatergory,Directory):
         try:
             os.rename(sourceDirectory,destinationFolder)
         except:
-            print(filename, "Error contact an admin")
+            log((filename, "Error: Coudln't move the file\n"))
 
+def log(data):
+    file = open("Log.txt","a")
+    for x in data:
+        file.writelines(x)
+    file.close()
 
 fileExtension = fetchExtension(downloadDir)
-printFileName(fileExtension)
 fileCatergory = sortCatergory(fileExtension)
 folderNames = foldersToCreate(fileCatergory,downloadDir)
 createFolders(folderNames,downloadDir)
 moveFiles(fileCatergory,downloadDir)
+print("Folders sorted please check the log fils for any errors, If any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
