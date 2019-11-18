@@ -2,10 +2,8 @@ Functions
 - Get all extenstion of each file and return an array of extension of files
 
 - Find which category each file belongs to and return the dictonary of files and catergories 
-	- Find what folders are needed and return an array of folders need to make
+- Find what folders are needed and return an array of folders need to make
 
 - Create all the folders needed
-	- Check all the folders that are in directory and return an array of folders in the dir 
-
 - Move the files into the folders 
 

@@ -84,9 +84,21 @@ def foldersToCreate(fileCatergoryArray,Directory):
         folderName = catergory[1]
         if folderName not in folders:
             folders.append(folderName)
-            
+
     return folders #returns the array of folders to create
+
+def createFolders(foldersName,Directory):
+    for folder in folderNames:
+        Directory = Directory + "\\"+ folder
+        try:
+            # Create target Directory
+            os.mkdir(Directory)
+            print("Directory " , Directory ,  " Created ")
+        except FileExistsError:
+            print("Directory " , Directory ,  " already exists")
+        Directory = Directory.replace("\\"+ folder,"")
 
 fileExtension = fetchExtension(downloadDir)
 fileCatergory = sortCatergory(fileExtension)
 folderNames = foldersToCreate(fileCatergory,downloadDir)
+createFolders(folderNames,downloadDir)
