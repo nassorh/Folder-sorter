@@ -75,9 +75,18 @@ def sortCatergory(extensionArray):
                         extensionError.append(extension)
 
 
-    print("These extension need to be added:\n",extensionError)
+    print("These extension need to be added:\n",extensionError,"\n")
     return fileCatergory #Returns an array of the filename and the catergory
 
+def foldersToCreate(fileCatergoryArray,Directory):
+    folders  = []
+    for catergory in fileCatergoryArray:
+        folderName = catergory[1]
+        if folderName not in folders:
+            folders.append(folderName)
+            
+    return folders #returns the array of folders to create
 
 fileExtension = fetchExtension(downloadDir)
-fileCatergory =sortCatergory(fileExtension)
+fileCatergory = sortCatergory(fileExtension)
+folderNames = foldersToCreate(fileCatergory,downloadDir)
