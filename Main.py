@@ -1,4 +1,4 @@
-import os
+import os,shutil
 
 downloadDir = "C:\\Users\\Hamad Nassor\\Downloads"
 
@@ -75,7 +75,7 @@ def sortCatergory(extensionArray):
                         extensionError.append(extension)
 
 
-    print("These extension need to be added:\n",extensionError,"\n")
+    print("--Send these details to an admin--\nThese extension need to be added:\n",extensionError,"\n")
     return fileCatergory #Returns an array of the filename and the catergory
 
 def foldersToCreate(fileCatergoryArray,Directory):
@@ -89,16 +89,28 @@ def foldersToCreate(fileCatergoryArray,Directory):
 
 def createFolders(foldersName,Directory):
     for folder in folderNames:
-        Directory = Directory + "\\"+ folder
+        FileDirectory = Directory + "\\" + folder
         try:
             # Create target Directory
-            os.mkdir(Directory)
-            print("Directory " , Directory ,  " Created ")
+            os.mkdir(FileDirectory)
+            print("Directory " , FileDirectory ,  " Created ")
         except FileExistsError:
-            print("Directory " , Directory ,  " already exists")
-        Directory = Directory.replace("\\"+ folder,"")
+            print("Directory " , FileDirectory ,  " already exists")
+
+def moveFiles(filesCatergory,Directory):
+    for files in filesCatergory:
+        filename = files[0]
+        FolderName = files[1]
+        sourceDirectory = Directory + "\\" + filename
+        destinationFolder = Directory + "\\" + FolderName + "\\" + filename
+        try:
+            os.rename(sourceDirectory,destinationFolder)
+        except:
+            print(file, "Error contact an admin")
+
 
 fileExtension = fetchExtension(downloadDir)
 fileCatergory = sortCatergory(fileExtension)
 folderNames = foldersToCreate(fileCatergory,downloadDir)
 createFolders(folderNames,downloadDir)
+moveFiles(fileCatergory,downloadDir)
