@@ -1,7 +1,5 @@
 import os,shutil
 
-downloadDir = "C:\\Users\\Hamad Nassor\\Downloads"
-
 def printFileName(fileName):
     try:
         print(fileName)
@@ -108,11 +106,13 @@ def log(data):
     for x in data:
         file.writelines(x)
     file.close()
-    print("Data logged")
 
+
+downloadDir = input("Enter the Directory of the folder Directory: ")
 fileExtension = fetchExtension(downloadDir)
 fileCatergory = sortCatergory(fileExtension)
 folderNames = foldersToCreate(fileCatergory,downloadDir)
 createFolders(folderNames,downloadDir)
 moveFiles(fileCatergory,downloadDir)
 print("Folders sorted please check the log fils for any errors, If any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
+input("\nPress any button to exit")
