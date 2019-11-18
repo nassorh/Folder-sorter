@@ -104,10 +104,11 @@ def moveFiles(filesCatergory,Directory):
             log((filename, "Error: Coudln't move the file\n"))
 
 def log(data):
-    file = open("Log.txt","a")
+    file = open("Log.txt","w+")
     for x in data:
         file.writelines(x)
     file.close()
+    print("Data logged")
 
 fileExtension = fetchExtension(downloadDir)
 fileCatergory = sortCatergory(fileExtension)
