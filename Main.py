@@ -26,7 +26,6 @@ def fetchExtension(folderDir):
     return extensions
 
 def sortCatergory(extensionArray):
-
     #Database
     catergorys = [
     ["audioFiles","aif","cda","mid","midi","mp3","mpa","ogg","wav","wma","wpl"],#a,c,m,o,w
@@ -107,12 +106,12 @@ def log(data):
         file.writelines(x)
     file.close()
 
-
+#Main
 downloadDir = input("Enter the Directory of the folder Directory: ")
 fileExtension = fetchExtension(downloadDir)
 fileCatergory = sortCatergory(fileExtension)
 folderNames = foldersToCreate(fileCatergory,downloadDir)
 createFolders(folderNames,downloadDir)
 moveFiles(fileCatergory,downloadDir)
-print("Folders sorted please check the log fils for any errors, If any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
+print("\nFolders sorted please check the log fils for any errors, If any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
 input("\nPress any button to exit")
