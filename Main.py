@@ -26,7 +26,7 @@ def fetchExtension(folderDir):
     for file in arrayOfFiles:
         if "." in file:
             extension = file.split(".")
-            extensions.append((file,extension[1]))
+            extensions.append((file,extension[-1]))
     #Returns an array of extensions
     return extensions
 
@@ -38,10 +38,10 @@ def sortCatergory(extensionArray):
     ["compressedFiles","7z","arj","deb","pkg","rar","rpm","tar.gz","z","zip"],#7,a,d,p,r,t,z
     ["discMediaFiles","bin","dmg","iso","toast","vcd"],#b,d,i,t,v
     ["dataDatabaseFiles","csv","dat","db","dbf","log","mdb","sav","sql","tar","xml"],#c,d,l,m,s,t,x
-    ["executable","apk","bat","bin","cgi","pl","com","exe","gadget","jar","py","wsf"],#a,b,c,p,l,e,g,j,w
+    ["executable","apk","bat","bin","cgi","pl","com","exe","gadget","jar","py","wsf","lnk"],#a,b,c,p,l,e,g,j,w
     ["fontFile","fnt","fon","otf","ttf"],#f,f,o,t
     ["imageFile","ai","bmp","gif","ico","jpeg","jpg","png","ps","psd","svg","tif","tiff"],#a,b,g,i,j,p,s,t
-    ["internetRelatedFiles","asp","aspx","cer","cfm","cgi","pl","css","htm","html","js","jsp","part","php","py","rss","xhtml"],#a,c,p,h,j,p,r,x
+    ["internetRelatedFiles","asp","aspx","cer","cfm","cgi","pl","css","htm","html","js","jsp","part","php","py","rss","xhtml","url"],#a,c,p,h,j,p,r,x
     ["presentationFiles","key","odp","pss","ppt","pptx"],#k,o,p
     ["programmingFiles","c","class","cpp","cs","h","java","sh","swift","vb"],#c,h,j,s,v
     ["spreadsheetFiles","ods","xlr","xls","xlsx"],#o,x
@@ -67,7 +67,6 @@ def sortCatergory(extensionArray):
             catergoryName = catergory[0]
             if extension in catergory:
                 fileCatergory.append((filename,catergoryName)) #If the file catergory is found the file name and catergory name is stored in the array
-                #print("found")
             else:
                 count += 1
                 if count > 13: #After checking through the 13 catergorys its add the extension to list of extension which are not listed
@@ -106,10 +105,11 @@ def moveFiles(filesCatergory,Directory):
         try:
             os.rename(sourceDirectory,destinationFolder)
         except:
-            print(file, "Error contact an admin")
+            print(filename, "Error contact an admin")
 
 
 fileExtension = fetchExtension(downloadDir)
+printFileName(fileExtension)
 fileCatergory = sortCatergory(fileExtension)
 folderNames = foldersToCreate(fileCatergory,downloadDir)
 createFolders(folderNames,downloadDir)
