@@ -106,7 +106,7 @@ class folderSorter():
     def log(self,data):
         file = open("Log.txt","w+")
         for x in data:
-            file.writelines(x+"\n")
+            file.writelines(x)
         file.close()
 
 class GUI():
