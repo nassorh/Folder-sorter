@@ -106,8 +106,8 @@ class folderSorter():
         file.close()
 
 class GUI():
-    def __init__(self,root):
-        self.master = root
+    def __init__(self):
+        self.master = tk.Tk()
         self.master.geometry("1000x750")
         self.master.title("Folder Sorter")
         self.frame = tk.Frame(self.master)
@@ -132,16 +132,25 @@ class GUI():
         sort.foldersToCreate()
         sort.createFolders()
         sort.moveFiles()
-        self.successful()
+        self.feedBack()
 
-    def successful(self):
+    def feedBack(self):
         top = tk.Toplevel()
-        top.title("Successful")
-        msg = tk.Label(top, text ="Folders sorted please check the log fils for any errors, If any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
-        msg.pack()
         top.mainloop()
+        top.title("Successful")
+        msg = tk.Message(top, text ="Folders sorted please check the log fils for any errors, If any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
+        msg.pack()
+        input("\nPress any button to exit")
 
-root = tk.Tk()
-gui = GUI(root)
+gui = GUI()
 gui.mainScreen()
-root.mainloop()
+
+def sortAlgorithm(directory):
+    sort = folderSorter(directory)
+    sort.fetchExtension()
+    sort.sortCatergory()
+    sort.foldersToCreate()
+    sort.createFolders()
+    sort.moveFiles()
+    print("\nFolders sorted please check the log fils for any errors, If any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
+    input("\nPress any button to exit")
