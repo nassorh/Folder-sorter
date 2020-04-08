@@ -112,7 +112,7 @@ class folderSorter():
 class GUI():
     def __init__(self,root):
         self.master = root
-        self.master.geometry("1000x750")
+        self.master.geometry("550x100")
         self.master.title("Folder Sorter")
         self.frame = tk.Frame(self.master)
         self.frame.grid()
@@ -141,7 +141,7 @@ class GUI():
     def successful(self):
         top = tk.Toplevel()
         top.title("Successful")
-        msg = tk.Label(top, text ="Folders sorted please check the log fils for any errors, If any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
+        msg = tk.Label(top, text ="Folders sorted please check the log fils for any errors\nIf any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
         msg.pack()
         top.mainloop()
 
