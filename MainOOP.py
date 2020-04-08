@@ -10,19 +10,23 @@ class folderSorter():
         self.folderNames = []
 
     def fetchExtension(self):
-        #Define all the extension array
-        extensions = []
+        #Vaild directory
+        if os.path.isdir(self.downloadDir):
+            #Define all the extension array
+            extensions = []
 
-        #All files in the folders
-        arrayOfFiles = os.listdir(self.downloadDir)
+            #All files in the folders
+            arrayOfFiles = os.listdir(self.downloadDir)
 
-        #Fetches all the extension
-        for file in arrayOfFiles:
-            if "." in file:
-                extension = file.split(".")
-                extensions.append((file,extension[-1]))
-        #Returns an array of extensions
-        self.extensions = extensions
+            #Fetches all the extension
+            for file in arrayOfFiles:
+                if "." in file:
+                    extension = file.split(".")
+                    extensions.append((file,extension[-1]))
+            #Returns an array of extensions
+            self.extensions = extensions
+        else:
+            raise Exception("File Directory is not valid")
 
     def sortCatergory(self):
         #Database
@@ -126,12 +130,12 @@ class GUI():
 
     def sortAlgorithm(self):
         folder_selected = filedialog.askdirectory()
-        sort = folderSorter(folder_selected)
-        sort.fetchExtension()
-        sort.sortCatergory()
-        sort.foldersToCreate()
-        sort.createFolders()
-        sort.moveFiles()
+        sort = folderSorter(folder_selected) #Classes the folder sort class
+        sort.fetchExtension()#Fetches all extension from files
+        sort.sortCatergory()#Fetches all catergory
+        sort.foldersToCreate()#Fetches all folders that need to be created
+        sort.createFolders()#Creates all the folders
+        sort.moveFiles()#Moves all the files into folders
         self.successful()
 
     def successful(self):
