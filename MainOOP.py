@@ -22,7 +22,7 @@ class folderSorter():
             for file in arrayOfFiles:
                 if "." in file:
                     extension = file.split(".")
-                    extensions.append((file,extension[-1]))
+                    extensions.append((file,extension[-1].lower()))
             #Returns an array of extensions
             self.extensions = extensions
         else:
