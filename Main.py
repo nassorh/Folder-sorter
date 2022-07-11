@@ -1,4 +1,6 @@
-from FolderSorter import *
+from Classes.FolderSorter import *
+import tkinter as tk
+from tkinter import filedialog
 
 class GUI():
     def __init__(self,root):
@@ -8,8 +10,6 @@ class GUI():
         self.frame = tk.Frame(self.master)
         self.frame.grid()
         self.master.grid_columnconfigure(0, weight=1)
-        #folder_selected = filedialog.askdirectory()
-        #print(folder_selected)
 
     def mainScreen(self):
         mainTitle = tk.Label(self.frame, text = "Welcome To The Folder Sorter 2.0")
@@ -18,21 +18,17 @@ class GUI():
         directoryText = tk.Button(self.frame, text = "Select Folder",command=self.sortAlgorithm)
         directoryText.config(font=("Courier","10"))
         directoryText.grid(row=5,column=3)
-
+        
     def sortAlgorithm(self):
-        folder_selected = filedialog.askdirectory()
-        sort = folderSorter(folder_selected) #Classes the folder sort class
-        sort.fetchExtension()#Fetches all extension from files
-        sort.sortCatergory()#Fetches all catergory
-        sort.foldersToCreate()#Fetches all folders that need to be created
-        sort.createFolders()#Creates all the folders
-        sort.moveFiles()#Moves all the files into folders
+        folder_selected_dir = filedialog.askdirectory()
+        files = Folder_Sorter.get_all_files(folder_selected_dir) 
+        Folder_Sorter.move_files(folder_selected_dir,files)
         self.successful()
 
     def successful(self):
         top = tk.Toplevel()
         top.title("Successful")
-        msg = tk.Label(top, text ="Folders sorted please check the log fils for any errors\nIf any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
+        msg = tk.Label(top, text ="If any errors were present please send the log file to the admin\nEmail: nassorh.dev@gmail.com")
         msg.pack()
         top.mainloop()
 
