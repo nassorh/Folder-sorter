@@ -38,17 +38,18 @@ class Folder_Sorter():
     
     @classmethod
     def move_files(cls,current_dir: str,files: list):
-        files = files [:4]
+        files = files
         for file in files:
-            source_directory = file.path
-            destination_directory = current_dir + "/" + file.catergory 
-            destination_file_directory = destination_directory + "/" + file.name
+            if file.catergory:
+                source_directory = file.path
+                destination_directory = current_dir + "/" + file.catergory 
+                destination_file_directory = destination_directory + "/" + file.name
 
-            try:
-                os.rename(source_directory,destination_file_directory)
-            except FileNotFoundError:
-                cls.create_folder(destination_directory)
-                os.rename(source_directory,destination_file_directory)
+                try:
+                    os.rename(source_directory,destination_file_directory)
+                except FileNotFoundError:
+                    cls.create_folder(destination_directory)
+                    os.rename(source_directory,destination_file_directory)
     
     @staticmethod
     def create_folder(file_directory: str):
